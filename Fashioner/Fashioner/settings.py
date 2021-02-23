@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,8 +36,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'category.apps.CategoryConfig',
-    'myapp.apps.MyappConfig',
+    # 'category.apps.CategoryConfig',
+    # 'myapp.apps.MyappConfig',
+    'Management.apps.ManagementConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,6 +127,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'Fashioner/static'),
+]
+STATIC_ROOT= os.path.join(BASE_DIR,'static')
