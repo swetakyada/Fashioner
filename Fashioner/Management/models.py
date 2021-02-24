@@ -4,8 +4,10 @@ from django.conf import settings
 # Create your models here.
 #Items class
 class Item(models.Model):
-    title =models.CharField(max_length=100)
-    price = models.FloatField()
+    title = models.CharField(max_length=100)
+    price = models.FloatField(default=0)
+    image = models.CharField(max_length = 500, default="")
+    category = models.CharField(max_length=100, default="")
     def __str__(self):
         return self.title
 
