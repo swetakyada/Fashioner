@@ -26,4 +26,5 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home-page.html'), name='home'),
     path('checkout/', TemplateView.as_view(template_name='checkout-page.html'), name='checkout'),
     path('products/', TemplateView.as_view(template_name='product-page.html'), name='products'),
+    path('cart/', TemplateView.as_view(template_name='cart-page.html'), name='cart'),
 ]
