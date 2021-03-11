@@ -94,7 +94,25 @@
 
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="accounts/login">
+            <a class="nav-link waves-effect" href="wishlist">
+              <i class="far fa-heart"></i>
+              <span class="clearfix d-none d-sm-inline-block">Wishlist</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="profile">
+              <i class="fas fa-user-circle"></i>
+              <span class="clearfix d-none d-sm-inline-block">Profile</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="accounts/login" onclick="">
               <span class="clearfix d-none d-sm-inline-block">login</span>
             </a>
           </li>
@@ -106,7 +124,7 @@
               <span class="clearfix d-none d-sm-inline-block">Signup</span>
             </a>
           </li>
-        </ul>
+        </ul> 
 
 
 
@@ -190,7 +208,7 @@
     <div class="container">
 
       <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark cyan mt-3 mb-5">
+      {% comment %} <nav class="navbar navbar-expand-lg navbar-dark cyan mt-3 mb-5">
 
         <!-- Navbar brand -->
         <span class="navbar-brand">Categories:</span>
@@ -212,13 +230,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Shirts</a>
+              <a class="nav-link" href="#">Men</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sport wears</a>
+              <a class="nav-link" href="#">Women</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Outwears</a>
+              <a class="nav-link" href="#">Kids</a>
             </li>
 
           </ul>
@@ -233,8 +251,9 @@
         <!-- Collapsible content -->
 
       </nav>
-      <!--/.Navbar-->
-
+      <!--/.Navbar--> {% endcomment %}
+      <br>
+      <br>
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
 
@@ -277,7 +296,7 @@
                 </h4>
 
                 <h3>
-                  <button type="button" class="btn btn-dark">Add to Cart</button>
+                  <button type="button" class="btn btn-cyan">Add to Cart</button>
                 </h3>
 
               </div>
