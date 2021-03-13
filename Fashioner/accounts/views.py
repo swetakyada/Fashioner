@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-
+from django.shortcuts import render
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
@@ -15,6 +15,7 @@ class LoginView(generic.CreateView):
 
 def index(request):
     if request.user.is_authenticated:
-        print("Logged in")
+        render(request,'home',context=None)
     else:
         print("Not logged in")
+

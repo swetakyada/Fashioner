@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from .models import Product
+from .models import Product,Cart
 # Create your views here.
 def products(request):
     context = {
@@ -11,4 +11,5 @@ def products(request):
 # class HomeView(ListView):
 #     model=Item
 #     template_name="home-page.html"
+
 
