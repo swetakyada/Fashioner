@@ -1,12 +1,21 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
-CATAGORY_CHOISES={
+CATAGORY_CHOISES = {
     ('M','Men'),
     ('W','Women'),
     ('K','Kids'),
 }
+
+SIZE_CHOISES = { 
+    ('S','Small'),
+    ('M','Medium'),
+    ('L','Large'),
+    ('XL','Extra Large'),
+    ('XXL','Extra Extra Large'),
+ }
 
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
@@ -20,15 +29,19 @@ class Category(models.Model):
 class Product(models.Model):
     product_name = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
-    image1 = models.CharField(max_length = 500, default="")
-    image2 = models.CharField(max_length = 500, default="")
-    image3 = models.CharField(max_length = 500, default="")
+    image1 = models.CharField(max_length = 1000, default="")
+    image2 = models.CharField(max_length = 1000, default="")
+    image3 = models.CharField(max_length = 1000, default="")
+    image4 = models.CharField(max_length = 1000, default="")
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, default="")
+    description = models.CharField(max_length = 1000, default="")
+    sizes = MultiSelectField(choices = SIZE_CHOISES, default="")
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField(default=1) 
+    size = models.CharField(choices=SIZE_CHOISES, max_length=3, default="")
 
 class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
