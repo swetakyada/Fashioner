@@ -269,13 +269,13 @@
                 <!--Grid row-->
                 <div class="row wow fadeIn">
 
-                    {% for item in products %}
+                    {% for item in items %}
 
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4">
 
                         <!--Card-->
-                        <div class="card">
+                        <div class="card" onclick="location.href='product/{{item.id}}'">
 
                             <!--Card image-->
                             <div class="view overlay">
