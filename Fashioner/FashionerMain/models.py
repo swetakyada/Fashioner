@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
+import random
+import string
 
 CATAGORY_CHOISES = {
     ('M','Men'),
@@ -32,7 +34,6 @@ class Product(models.Model):
     image1 = models.CharField(max_length = 1000, default="")
     image2 = models.CharField(max_length = 1000, default="")
     image3 = models.CharField(max_length = 1000, default="")
-    image4 = models.CharField(max_length = 1000, default="")
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, default="")
     description = models.CharField(max_length = 1000, default="")
     sizes = MultiSelectField(choices = SIZE_CHOISES, default="")
@@ -51,3 +52,4 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     products = models.ManyToManyField(Cart)
     ordered_date = models.DateTimeField(auto_now_add=True)
+    total_amount = models.IntegerField(default=0)

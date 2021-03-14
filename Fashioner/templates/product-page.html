@@ -150,14 +150,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-8 img-zoom-container" style="display: flex;align-items: center;">
-                <img id="myimage" src="https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/productimage/2019/12/12/1aab2a18-6774-4f83-b292-fe301755a3351576102551329-1.jpg" width="500" height="600">
+                <img id="myimage" src="{{product.image1}}" width="500" height="600">
                 <div id="myresult" class="img-zoom-result"></div>
             </div>
             <div class="col-3">
-                <div>HERE&NOW<br/> Black Printed Round Neck T-shirt</div>
+                <div>HERE&NOW<br/>{{product.product_name}}</div>
                 <hr><br/>
                 <center>
-                    <h2>Rs.1000</h2>
+                    <h2>{{product.price}}</h2>
                     <h5>inclusive all taxes</h5><br/>
                     <button type="button" class="p-2 btn btn-danger">Add to cart</button>
                     <button type="button" class="btn btn-light">Wishlist</button>
@@ -165,7 +165,7 @@
                 <div>
                     <br>
                     <h2>Product Details</h2>
-                    <p>Black and orange printed T-shirt, has a round neck, short sleeves</p>
+                    <p>{{product.description}}</p>
                     <p>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit iure atque, non deleniti quod nam, modi optio odit voluptas quaerat praesentium error totam accusamus ab rem, distinctio facere aperiam nostrum.
                     </p>
@@ -175,8 +175,8 @@
 
         <div class=" col">
             <br/>
-            <img id="myimage" src="https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/productimage/2019/12/12/1aab2a18-6774-4f83-b292-fe301755a3351576102551329-1.jpg" width="500" height="600">
-            <img id="myimage" src="https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/productimage/2019/12/12/1aab2a18-6774-4f83-b292-fe301755a3351576102551329-1.jpg" width="500" height="600">
+            <img id="myimage" src="{{product.image2}}" width="500" height="600">
+            <img id="myimage" src="{{product.image3}}" width="500" height="600">
         </div>
     </div>
 
