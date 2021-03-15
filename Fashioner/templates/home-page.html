@@ -90,24 +90,36 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                            {% for category in men %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                            {% for category in women %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                                <li>Boys</li>
+                            {% for category in boys %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
+                            {% comment %} </ul>
+                            
+                            <ul class="dropdown-menu"> {% endcomment %}
+                            <hr> 
+                                <li>Boys</li>
+                            {% for category in girls %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
                             </ul>
                         </li>
 
@@ -243,10 +255,10 @@
                     <div class="col-lg-3 col-md-6 mb-4">
 
                         <!--Card-->
-                        <div class="card" onclick="location.href='product/{{item.id}}'">
+                        <div class="card">
 
                             <!--Card image-->
-                            <div class="view overlay">
+                            <div class="view overlay" onclick="location.href='product/{{item.id}}'">
                                 <img src="{{item.image1}}" class="card-img-top" alt="">
                                 <a>
                                     <div class="mask rgba-white-slight"></div>
@@ -273,7 +285,7 @@
                                 </h4>
 
                                 <h3>
-                                    <button type="button" class="btn btn-cyan">Add to Cart</button>
+                                    <button type="button" class="btn btn-cyan" onclick="">Add to Wishlist</button>
                                 </h3>
 
                             </div>

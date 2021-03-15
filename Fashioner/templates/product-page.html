@@ -180,24 +180,31 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                            {% for category in men %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                            {% for category in women %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                            {% for category in boys %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
+                            <hr>
+                            {% for category in girls %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                            {% endfor %}
                             </ul>
                         </li>
 
