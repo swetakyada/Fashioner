@@ -18,10 +18,46 @@
     <!-- Your custom styles (optional) -->
     <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
     <title>profile</title>
-    <style>
+     <style type="text/css">
+        @import url('http://getbootstrap.com/dist/css/bootstrap.css');
+        .container {
+            margin-top: 10px;
+        }
+        
         .dropdown:hover .dropdown-menu {
             display: block;
             margin-top: 0;
+        }
+
+        .dropdown:hover .dropdown-menu-columns{
+            display: block;
+            margin-top: 0;
+            width:350px;
+            padding-left:10px;
+        }
+        html,
+        body,
+        header,
+        .carousel {
+            height: 60vh;
+        }
+        
+        @media (max-width: 740px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+        
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
         }
     </style>
 </head>
@@ -31,7 +67,7 @@
         <div class="container">
 
             <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="{% url 'home' %}" target="_blank">
+            <a class="navbar-brand waves-effect" href="home" target="_blank">
                 <strong class="cyan-text">Fashioner</strong>
             </a>
 
@@ -60,25 +96,39 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                                {% for category in men %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
+                                {% for category in women %}
+                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
+                            <div class="dropdown-menu dropdown-menu-columns">
+                                <div class="row ">
+                                    <div class="col text-center"}>
+                                        <h6>Boys</h6>
+                                        {% for category in boys %}
+                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
+                                    </div>
+                                    <div class="col text-center">
+                                        <h6>Girls</h6>
+                            
+                                        {% for category in girls %}
+                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
 
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#opening">Link</a></li>
-                            </ul>
+                                    </div>
+                                </div>
+
+                            </div>
                         </li>
 
                     </ul>
@@ -88,7 +138,7 @@
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'cart' %}">
+                        <a class="nav-link waves-effect" href="{% url 'cart' }">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="clearfix d-none d-sm-inline-block">Cart</span>
                         </a>
@@ -97,7 +147,7 @@
 
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'wishlist' %}">
+                        <a class="nav-link waves-effect" href="{% url 'wishlist'%}">
                             <i class="far fa-heart"></i>
                             <span class="clearfix d-none d-sm-inline-block">Wishlist</span>
                         </a>
@@ -106,7 +156,7 @@
 
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'profile' %}">
+                        <a class="nav-link waves-effect" href="{% url 'profile'%}">
                             <i class="fas fa-user-circle"></i>
                             <span class="clearfix d-none d-sm-inline-block">Profile</span>
                         </a>
@@ -115,7 +165,7 @@
 
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'logout'}" onclick="">
+                        <a class="nav-link waves-effect" href="{% url 'logout' %}" onclick="">
                             <span class="clearfix d-none d-sm-inline-block">logout</span>
                         </a>
                     </li>
@@ -130,7 +180,7 @@
     </div>
 
     <div class="h-75 p-lg-5">
-        <div class="container shadow-lg p-3 mb-5 bg-body w-25 h-100 p-lg-5">
+        <div class="container shadow-lg p-3 mb-5 bg-body w-25 h-150 p-lg-5">
             <table class="table table-bordered table-hover">
                 <tr>
                     <td>Username</td>
