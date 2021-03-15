@@ -14,6 +14,48 @@
     <!-- Your custom styles (optional) -->
     <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
     <title>Document</title>
+     <style type="text/css">
+        @import url('http://getbootstrap.com/dist/css/bootstrap.css');
+        .container {
+            margin-top: 10px;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+
+        .dropdown:hover .dropdown-menu-columns{
+            display: block;
+            margin-top: 0;
+            width:350px;
+            padding-left:10px;
+        }
+        html,
+        body,
+        header,
+        .carousel {
+            height: 60vh;
+        }
+        
+        @media (max-width: 740px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+        
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+    </style>
     <style>
         * {
             box-sizing: border-box;
@@ -151,7 +193,7 @@
         <div class="container">
 
             <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="#" target="_blank">
+            <a class="navbar-brand waves-effect" href="home" target="_blank">
                 <strong class="cyan-text">Fashioner</strong>
             </a>
 
@@ -180,32 +222,39 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
 
                             <ul class="dropdown-menu">
-                            {% for category in men %}
+                                {% for category in men %}
                                 <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
+                                {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
 
                             <ul class="dropdown-menu">
-                            {% for category in women %}
+                                {% for category in women %}
                                 <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
+                            <div class="dropdown-menu dropdown-menu-columns">
+                                <div class="row ">
+                                    <div class="col text-center"}>
+                                        <h6>Boys</h6>
+                                        {% for category in boys %}
+                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
+                                    </div>
+                                    <div class="col text-center">
+                                        <h6>Girls</h6>
+                            
+                                        {% for category in girls %}
+                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
 
-                            <ul class="dropdown-menu">
-                            {% for category in boys %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
-                            <hr>
-                            {% for category in girls %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
-                            </ul>
+                                    </div>
+                                </div>
+
+                            </div>
                         </li>
 
                     </ul>
@@ -242,7 +291,7 @@
 
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{%url 'logout' %}" onclick="">
+                        <a class="nav-link waves-effect" href="{% url 'logout' %}" onclick="">
                             <span class="clearfix d-none d-sm-inline-block">logout</span>
                         </a>
                     </li>

@@ -26,7 +26,13 @@
             display: block;
             margin-top: 0;
         }
-        
+
+        .dropdown:hover .dropdown-menu-columns{
+            display: block;
+            margin-top: 0;
+            width:350px;
+            padding-left:10px;
+        }
         html,
         body,
         header,
@@ -90,37 +96,39 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
 
                             <ul class="dropdown-menu">
-                            {% for category in men %}
+                                {% for category in men %}
                                 <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
+                                {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
 
                             <ul class="dropdown-menu">
-                            {% for category in women %}
+                                {% for category in women %}
                                 <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
-
-                            <ul class="dropdown-menu">
-                                <li>Boys</li>
-                            {% for category in boys %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
-                            {% comment %} </ul>
+                            <div class="dropdown-menu dropdown-menu-columns">
+                                <div class="row ">
+                                    <div class="col text-center"}>
+                                        <h6>Boys</h6>
+                                        {% for category in boys %}
+                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
+                                    </div>
+                                    <div class="col text-center">
+                                        <h6>Girls</h6>
                             
-                            <ul class="dropdown-menu"> {% endcomment %}
-                            <hr> 
-                                <li>Boys</li>
-                            {% for category in girls %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                            {% endfor %}
-                            </ul>
+                                        {% for category in girls %}
+                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
+
+                                    </div>
+                                </div>
+
+                            </div>
                         </li>
 
                     </ul>
@@ -157,7 +165,7 @@
 
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="logout" onclick="">
+                        <a class="nav-link waves-effect" href="{% url 'logout' %}" onclick="">
                             <span class="clearfix d-none d-sm-inline-block">logout</span>
                         </a>
                     </li>
