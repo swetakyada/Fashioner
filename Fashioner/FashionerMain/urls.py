@@ -10,5 +10,5 @@ urlpatterns = [
     path('cart/', TemplateView.as_view(template_name='cart-page.html'), name='cart'),
     path('wishlist/', TemplateView.as_view(template_name='wishlist-page.html'), name='wishlist'),
     path('profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
-    path('category/', TemplateView.as_view(template_name='category-page.html'), name='category'),
+    path('category/<cid>', views.category_page, name='category'),
 ]

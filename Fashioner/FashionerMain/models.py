@@ -8,7 +8,8 @@ import string
 CATAGORY_CHOISES = {
     ('M','Men'),
     ('W','Women'),
-    ('K','Kids'),
+    ('G','Girls'),
+    ('B','Boys'),
 }
 
 SIZE_CHOISES = { 
@@ -19,17 +20,17 @@ SIZE_CHOISES = {
     ('XXL','Extra Extra Large'),
  }
 
+# def custom_id(cname, cfor):
+#     return ' '.join(map(str,[cfor, cname]))
+
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
     category_for = models.CharField(choices=CATAGORY_CHOISES, max_length=5)
-
-    def custom_id(self, cname, cfor):
-        return ' '.join(map(str,[cfor, cname]))
-
-    category_id = models.CharField(primary_key=True, default = custom_id(None, category_name, category_for), max_length=50)
+    category_id = models.CharField(primary_key=True, default = " ", max_length=100)
 
 class Product(models.Model):
     product_name = models.CharField(max_length=100)
+    tagline = models.CharField(max_length=100, default="")
     price = models.IntegerField(default=0)
     image1 = models.CharField(max_length = 1000, default="")
     image2 = models.CharField(max_length = 1000, default="")
