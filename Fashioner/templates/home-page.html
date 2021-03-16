@@ -165,7 +165,7 @@
 
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'logout' %}" onclick="">
+                        <a class="nav-link waves-effect" href="{% url 'logout' %}">
                             <span class="clearfix d-none d-sm-inline-block">logout</span>
                         </a>
                     </li>
@@ -262,11 +262,14 @@
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4">
 
+                        <form action="product/" name="{{ item.id }}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="pid" value="{{ item.id }}">
                         <!--Card-->
-                        <div class="card">
-
+                        <div class="card" onclick="document.forms['{{ item.id }}'].submit();">
+                                                
                             <!--Card image-->
-                            <div class="view overlay" onclick="location.href='product/{{item.id}}'">
+                            <div class="view overlay">
                                 <img src="{{item.image1}}" class="card-img-top" alt="">
                                 <a>
                                     <div class="mask rgba-white-slight"></div>
@@ -282,25 +285,20 @@
                                 </a>
                                 <h5>
                                     <strong>
-                    <a href="" class="dark-grey-text">{{ item.product_name }}
-                      {% comment %} <span class="badge badge-pill danger-color">NEW</span> {% endcomment %}
-                    </a>
-                  </strong>
+                                        <a href="" class="dark-grey-text">{{ item.product_name }}</a>
+                                    </strong>
                                 </h5>
 
                                 <h4 class="font-weight-bold blue-text">
                                     <strong>{{ item.price }}</strong>
                                 </h4>
 
-                                <h3>
-                                    <button type="button" class="btn btn-cyan" onclick="">Add to Wishlist</button>
-                                </h3>
-
                             </div>
                             <!--Card content-->
 
                         </div>
                         <!--Card-->
+                        </form>
 
                     </div>
                     <!--Grid column-->

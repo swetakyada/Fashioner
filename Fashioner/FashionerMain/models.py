@@ -13,11 +13,12 @@ CATAGORY_CHOISES = {
 }
 
 SIZE_CHOISES = { 
-    ('S','Small'),
-    ('M','Medium'),
-    ('L','Large'),
-    ('XL','Extra Large'),
-    ('XXL','Extra Extra Large'),
+    ('28','S'),
+    ('30','M'),
+    ('32','L'),
+    ('34','XL'),
+    ('36','XXL'),
+    ('38','XXXL'),
  }
 
 # def custom_id(cname, cfor):
@@ -44,6 +45,7 @@ class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField(default=1) 
     size = models.CharField(choices=SIZE_CHOISES, max_length=3, default="")
+    price = models.IntegerField(default=0)
 
 class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
