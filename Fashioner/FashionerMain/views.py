@@ -38,7 +38,8 @@ def product_page(request, pid):
         'boys': boys,
     }
     return render(request, "product-page.html", context)
-
+    
+@login_required(login_url='/accounts/')
 def category_page(request, cid):
     products = Product.objects.filter(category_id = cid)
     men = Category.objects.filter(category_for="M")
