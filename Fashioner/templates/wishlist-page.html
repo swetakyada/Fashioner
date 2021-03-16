@@ -215,22 +215,18 @@
                     <th scope="col">image</th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Add to cart</th>
                     <th scope="col">Remove</th>
                 </tr>
             </thead>
             <tbody>
+                {% for item in items %}
                 <tr>
-                    <td width="200">
-                        <img src="https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/productimage/2019/12/18/0b9d9bbe-6a80-4e6a-9498-07002b81d47e1576621811374-1.jpg" class="img-fluid img-thumbnail">
-                    </td>
-                    <td scope="row" width="200">
-                        shreya goti
-                    </td>
-                    <td width="200">@mdo</td>
-                    <td width="200">@mdo</td>
-                    <td width="200">@mdo</td>
+                    <td width="100"><img src="{{ item.product.image1 }}" class="img-fluid img-thumbnail"></td>
+                    <td scope="row" width="200">{{ item.product.product_name }}</td>
+                    <td width="200">{{ item.product.price }}</td>
+                    <td width="200"><form action="removefromwishlist" method="POST">{% csrf_token %}<input type="hidden" name="wid" value="{{ item.id }}"><button type="submit">Remove</button></form></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
