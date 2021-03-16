@@ -46,6 +46,7 @@ class Cart(models.Model):
     quantity = models.IntegerField(default=1) 
     size = models.CharField(choices=SIZE_CHOISES, max_length=3, default="")
     price = models.IntegerField(default=0)
+    ordered = models.BooleanField(default=False)
 
 class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)

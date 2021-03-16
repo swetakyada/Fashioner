@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views.generic import ListView
-from .models import Product,Cart,Category
+from .models import Product,Cart,Category,Order,WishList
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -64,7 +64,8 @@ def user_cart(request):
     length = len(items)
     total = 0 
     for item in items:
-        total = total + item.price
+        if(item.ordered == False):
+            total = total + item.price
     return render(request, "cart-page.html", {'items': items, 'length': length, 'total': total})
 
 def add_to_cart(request):
@@ -83,3 +84,44 @@ def remove_from_cart(request):
 
 def update_cart_item(request):
     return redirect(user_cart)
+
+def place_order(request):
+    user = request.user
+    items = Cart.objects.filter(user = user)
+    length = len(items)
+    total = 0 
+    for item in items:
+        total = total + item.price
+        item.ordered = True
+    order = Order(user = user, products = items, total_amount = total)
+    order.save()
+    return redirect(user_cart)
+
+def checkout(request):
+    user = request.user
+    items = Cart.objects.filter(user = user)
+    length = len(items)
+    total = 0 
+    for item in items:
+        if(item.ordered == False):
+            total = total + item.price
+    return render(request, "checkout-page.html", {'items': items, 'length': length, 'total': total})
+
+def user_wishlist(request):
+    user = request.user
+    items = WishList.objects.filter(user = user)
+    length = len(items)
+    return render(request, "wishlist-page.html", {'items': items, 'length': length})
+
+def add_to_wishlist(request):
+    user = request.user
+    product = Product.objects.get(id=request.POST.get('pid'))
+    item = WishList(user = user, product = product)
+    item.save()
+    return redirect(user_wishlist)
+
+def remove_from_wishlist(request):
+    wid = request.POST.get('wid')
+    wishlist_item = WishList.objects.get(id = wid)
+    wishlist_item.delete()
+    return redirect(user_wishlist)

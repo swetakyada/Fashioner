@@ -323,7 +323,11 @@
                         <input type="hidden" value="qty" value=2>
                         <button type="submit" class="p-2 btn btn-danger">Add to cart</button>
                     </form>
-                    <button type="button" class="btn btn-light">Wishlist</button>
+                    <form action="addtowishlist" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="pid" value="{{product.id}}">
+                        <button type="submit" class="btn btn-light">Wishlist</button>
+                    </form>
                 </center>
                 <div>
                     <br>
