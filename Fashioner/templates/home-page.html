@@ -26,13 +26,14 @@
             display: block;
             margin-top: 0;
         }
-
-        .dropdown:hover .dropdown-menu-columns{
+        
+        .dropdown:hover .dropdown-menu-columns {
             display: block;
             margin-top: 0;
-            width:350px;
-            padding-left:10px;
+            width: 350px;
+            padding-left: 10px;
         }
+        
         html,
         body,
         header,
@@ -62,119 +63,8 @@
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark black scrolling-navbar">
-        <div class="container">
 
-            <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="home" target="_blank">
-                <strong class="cyan-text">Fashioner</strong>
-            </a>
-
-            <!-- Collapse -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-            <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link waves-effect" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-                    </li>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">All
-                <span class="sr-only">(current)</span>
-              </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
-
-                            <ul class="dropdown-menu">
-                                {% for category in men %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
-
-                            <ul class="dropdown-menu">
-                                {% for category in women %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
-                            <div class="dropdown-menu dropdown-menu-columns">
-                                <div class="row ">
-                                    <div class="col text-center"}>
-                                        <h6>Boys</h6>
-                                        {% for category in boys %}
-                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
-                                    </div>
-                                    <div class="col text-center">
-                                        <h6>Girls</h6>
-                            
-                                        {% for category in girls %}
-                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                    <!-- Links -->
-                </ul>
-
-                <!-- Right -->
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="cart">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Cart</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="wishlist">
-                            <i class="far fa-heart"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Wishlist</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="profile">
-                            <i class="fas fa-user-circle"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Profile</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'logout' %}">
-                            <span class="clearfix d-none d-sm-inline-block">logout</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </nav>
-    <!-- Navbar -->
+    {% include "navbar.html" %}
 
     <!--Carousel Wrapper-->
     <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
@@ -263,41 +153,41 @@
                     <div class="col-lg-3 col-md-6 mb-4">
 
                         <form action="product/" name="{{ item.id }}" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="pid" value="{{ item.id }}">
-                        <!--Card-->
-                        <div class="card" onclick="document.forms['{{ item.id }}'].submit();">
-                                                
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img src="{{item.image1}}" class="card-img-top" alt="">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
+                            {% csrf_token %}
+                            <input type="hidden" name="pid" value="{{ item.id }}">
+                            <!--Card-->
+                            <div class="card" onclick="document.forms['{{ item.id }}'].submit();">
 
-                            <!--Card content-->
-                            <div class="card-body text-center">
-                                <!--Category & Title-->
-                                <a href="" class="grey-text">
-                                    <h5> {{ item.category.category_name }} </h5>
-                                </a>
-                                <h5>
-                                    <strong>
+                                <!--Card image-->
+                                <div class="view overlay">
+                                    <img src="{{item.image1}}" class="card-img-top" alt="">
+                                    <a>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <!--Card image-->
+
+                                <!--Card content-->
+                                <div class="card-body text-center">
+                                    <!--Category & Title-->
+                                    <a href="" class="grey-text">
+                                        <h5> {{ item.category.category_name }} </h5>
+                                    </a>
+                                    <h5>
+                                        <strong>
                                         <a href="" class="dark-grey-text">{{ item.product_name }}</a>
                                     </strong>
-                                </h5>
+                                    </h5>
 
-                                <h4 class="font-weight-bold blue-text">
-                                    <strong>{{ item.price }}</strong>
-                                </h4>
+                                    <h4 class="font-weight-bold blue-text">
+                                        <strong>{{ item.price }}</strong>
+                                    </h4>
+
+                                </div>
+                                <!--Card content-->
 
                             </div>
-                            <!--Card content-->
-
-                        </div>
-                        <!--Card-->
+                            <!--Card-->
                         </form>
 
                     </div>

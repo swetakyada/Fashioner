@@ -3,8 +3,11 @@ from django.views.generic import ListView
 from .models import Product,Cart,Category,Order,WishList
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth.models import User
+
 
 # Create your views here.
+
 @login_required(login_url='/accounts/')
 def products(request):
     products = Product.objects.all()
@@ -71,7 +74,7 @@ def user_cart(request):
 def add_to_cart(request):
     user = request.user
     itm = Product.objects.get(id=request.POST.get('pid'))
-    item = Cart(user = user, product = itm, quantity = request.POST.get('qty', 1), size = request.POST.get('sz', '30'))
+    item = Cart(user = user, product = itm, quantity = request.POST.get('value',1), size = request.POST.get('size', 'value'))
     item.price = itm.price * item.quantity
     item.save()
     return redirect(user_cart)
@@ -125,3 +128,18 @@ def remove_from_wishlist(request):
     wishlist_item = WishList.objects.get(id = wid)
     wishlist_item.delete()
     return redirect(user_wishlist)
+
+
+
+def profile_page(request):
+    men = Category.objects.filter(category_for="M")
+    women = Category.objects.filter(category_for="W")
+    girls = Category.objects.filter(category_for="G")
+    boys = Category.objects.filter(category_for="B")
+    context = {
+        'men': men,
+        'women': women,
+        'girls': girls,
+        'boys': boys,
+    }
+    return render(request, "profile.html", context)
