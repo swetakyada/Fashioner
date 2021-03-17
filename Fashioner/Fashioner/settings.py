@@ -36,8 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
-    'FashionerMain',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'multiselectfield',
+    'accounts',
+    'FashionerMain',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Fashioner.urls'
@@ -64,6 +65,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             str(BASE_DIR.joinpath('templates')),
+            str(BASE_DIR.joinpath('Fashioner/static')),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -133,10 +135,11 @@ STATIC_URL = '/static/'
 
 
 STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'Fashioner/static'),
+    os.path.join(BASE_DIR,'static'),
 ]
-STATIC_ROOT= os.path.join(BASE_DIR,'static')
+STATIC_ROOT= os.path.join(BASE_DIR,'Fashioner/static')
 
 LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
