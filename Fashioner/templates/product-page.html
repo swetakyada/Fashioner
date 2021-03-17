@@ -13,9 +13,76 @@
     <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
-    <title>Document</title>
-     <style type="text/css">
+    <title>Product Details</title>
+    <style type="text/css">
         @import url('http://getbootstrap.com/dist/css/bootstrap.css');
+        /* incement-decrement  quantity */
+        
+        .former {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .value-button {
+            display: inline-block;
+            border: 1px solid #ddd;
+            margin: 0px;
+            width: 40px;
+            height: 41px;
+            text-align: center;
+            vertical-align: middle;
+            padding: 11px 0;
+            background: #eee;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .value-button:hover {
+            cursor: pointer;
+        }
+        
+        .former #decrease {
+            margin-right: -4px;
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .former #increase {
+            margin-left: -4px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .former #input-wrap {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        input#number {
+            text-align: center;
+            border: none;
+            padding-top: -1px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            margin: 0px auto;
+            padding-top: 1px;
+            width: 40px;
+            height: 40px;
+            background-color: ghostwhite;
+        }
+        
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* increment -decrement quantity */
+        
         .container {
             margin-top: 10px;
         }
@@ -24,13 +91,32 @@
             display: block;
             margin-top: 0;
         }
-
-        .dropdown:hover .dropdown-menu-columns{
+        
+        .dropdown:hover .dropdown-menu-columns {
             display: block;
             margin-top: 0;
-            width:350px;
-            padding-left:10px;
+            width: 350px;
+            padding-left: 10px;
         }
+        
+        .boxed label {
+            display: inline-block;
+            width: 55px;
+            padding: 10px;
+            border: solid 2px #ccc;
+            border-radius: 150px;
+            transition: all 0.3s;
+        }
+        
+        .boxed input[type="radio"] {
+            display: none;
+        }
+        
+        .boxed input[type="radio"]:checked+label {
+            border: solid 2px green;
+            border-radius: 150px;
+        }
+        
         html,
         body,
         header,
@@ -189,117 +275,8 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark black scrolling-navbar">
-        <div class="container">
 
-            <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="home" target="_blank">
-                <strong class="cyan-text">Fashioner</strong>
-            </a>
-
-            <!-- Collapse -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-            <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link waves-effect" href="{% url 'home' %}">Home
-              <span class="sr-only">(current)</span>
-            </a>
-                    </li>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">All
-                <span class="sr-only">(current)</span>
-              </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
-
-                            <ul class="dropdown-menu">
-                                {% for category in men %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
-
-                            <ul class="dropdown-menu">
-                                {% for category in women %}
-                                <li><a href="category/{{category.category_id}}">{{category.category_name}}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Kids</a>
-                            <div class="dropdown-menu dropdown-menu-columns">
-                                <div class="row ">
-                                    <div class="col text-center"}>
-                                        <h6>Boys</h6>
-                                        {% for category in boys %}
-                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
-                                    </div>
-                                    <div class="col text-center">
-                                        <h6>Girls</h6>
-                            
-                                        {% for category in girls %}
-                                        <a href="category/{{category.category_id}}">{{category.category_name}}</a><br> {% endfor %}
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                    <!-- Links -->
-                </ul>
-
-                <!-- Right -->
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'cart' %}">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Cart</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'wishlist' %}">
-                            <i class="far fa-heart"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Wishlist</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'profile' %}">
-                            <i class="fas fa-user-circle"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Profile</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{% url 'logout' %}" onclick="">
-                            <span class="clearfix d-none d-sm-inline-block">logout</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </nav>
+    {% include "navbar.html" %}
     <div style="padding-left: 35px; padding-top:75px;">
         <h2>Product Details</h2>
     </div>
@@ -316,11 +293,29 @@
                 <center>
                     <h2>{{product.price}}</h2>
                     <h5>inclusive all taxes</h5><br/>
-                    <form action="addtocart" method="POST">
+                    <form action="addtocart" method="POST" class="boxed">
                         {% csrf_token %}
+                        <!-- size radio -->
+                        <input type="radio" id="S" name="size" value="S">
+                        <label for="S">S</label>
+                        <input type="radio" id="M" name="size" value="M">
+                        <label for="M">M</label>
+                        <input type="radio" id="L" name="size" value="L">
+                        <label for="L">L</label>
+                        <input type="radio" id="XL" name="size" value="XL">
+                        <label for="XL">XL</label>
+                        <input type="radio" id="XXL" name="size" value="XXL">
+                        <label for="XXL">XXL</label><br>
+                        <!--  Quantity -->
+                        <div class="former">
+                            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                            <input type="number" name="number" id="number" value="0" />
+                            <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                        </div>
+
                         <input type="hidden" name="pid" value="{{product.id}}">
-                        <input type="hidden" value="sz" value="30">
-                        <input type="hidden" value="qty" value=2>
+                        <!-- <input type="hidden" value="sz" value="30">
+                        <input type="hidden" value="qty" value=2> -->
                         <button type="submit" class="p-2 btn btn-danger">Add to cart</button>
                     </form>
                     <form action="addtowishlist" method="POST">
@@ -347,6 +342,22 @@
         </div>
     </div>
 
+    <script>
+        function increaseValue() {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('number').value = value;
+        }
+
+        function decreaseValue() {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value < 1 ? value = 1 : '';
+            value--;
+            document.getElementById('number').value = value;
+        }
+    </script>
     <script>
         // Initiate zoom effect:
         imageZoom("myimage", "myresult");
