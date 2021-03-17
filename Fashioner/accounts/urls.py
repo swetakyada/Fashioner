@@ -6,6 +6,7 @@ from django.views.generic.base import TemplateView
 from . import views
 
 
+
 urlpatterns = [
     # path('logout/',TemplateView.as_view(template_name='registration/logout.html'), name='logout'),
     path('signup/', views.signup_view, name="signup"),

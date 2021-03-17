@@ -173,7 +173,7 @@
         }
         
         .container {
-            margin-top: 10px;
+            margin: 0;
         }
         
         .dropdown:hover .dropdown-menu {
@@ -275,15 +275,13 @@
 </head>
 
 <body>
-
     {% include "navbar.html" %}
-    <div style="padding-left: 35px; padding-top:75px;">
-        <h2>Product Details</h2>
+    <div class="pl-4" style="padding-top: 70px; padding-bottom: 0px;">
+        <h5>Product Detail</h5>
     </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-8 img-zoom-container" style="display: flex;align-items: center;">
+    <div class="container-fluid pt-0 m-0">
+        <div class="row pt-0 mt-lg-0">
+            <div class="col-8 img-zoom-container pb-0 m-0" style="display: flex; justify-content: flex-start;">
                 <img id="myimage" src="{{product.image1}}" width="500" height="600">
                 <div id="myresult" class="img-zoom-result"></div>
             </div>
