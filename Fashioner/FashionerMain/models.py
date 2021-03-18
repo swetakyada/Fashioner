@@ -41,7 +41,7 @@ class Product(models.Model):
     sizes = MultiSelectField(choices = SIZE_CHOISES, default="")
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField(default=1) 
     size = models.CharField(choices=SIZE_CHOISES, max_length=3, default="")
@@ -49,11 +49,11 @@ class Cart(models.Model):
     ordered = models.BooleanField(default=False)
 
 class WishList(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Cart)
     ordered_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length = 1000, default="")

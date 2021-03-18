@@ -145,7 +145,15 @@ def user_wishlist(request):
     user = request.user
     items = WishList.objects.filter(user = user)
     length = len(items)
-    return render(request, "wishlist-page.html", {'items': items, 'length': length})
+    context = {
+        'items': items,
+        'length': length,
+        'men': men,
+        'women': women,
+        'girls': girls,
+        'boys': boys,
+    }
+    return render(request, "wishlist-page.html", context)
 
 def add_to_wishlist(request):
     user = request.user
