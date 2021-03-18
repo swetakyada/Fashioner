@@ -8,13 +8,16 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
+
+men = Category.objects.filter(category_for="M")
+women = Category.objects.filter(category_for="W")
+girls = Category.objects.filter(category_for="G")
+boys = Category.objects.filter(category_for="B")
+
+
 @login_required(login_url='/accounts/')
 def products(request):
     products = Product.objects.all()
-    men = Category.objects.filter(category_for="M")
-    women = Category.objects.filter(category_for="W")
-    girls = Category.objects.filter(category_for="G")
-    boys = Category.objects.filter(category_for="B")
     context = {
         'items': products,
         'men': men,
@@ -69,13 +72,22 @@ def user_cart(request):
     for item in items:
         if(item.ordered == False):
             total = total + item.price
-    return render(request, "cart-page.html", {'items': items, 'length': length, 'total': total})
+    context = {
+        'items': items, 
+        'length': length, 
+        'total': total,
+        'men': men,
+        'women': women,
+        'girls': girls,
+        'boys': boys,
+    }
+    return render(request, "cart-page.html", context)
 
 def add_to_cart(request):
     user = request.user
     itm = Product.objects.get(id=request.POST.get('pid'))
-    item = Cart(user = user, product = itm, quantity = request.POST.get('value',1), size = request.POST.get('size', 'value'))
-    item.price = itm.price * item.quantity
+    item = Cart(user = user, product = itm, quantity = request.POST.get('qty'), size = request.POST.get('size'))
+    item.price = int(itm.price) * int(item.quantity)
     item.save()
     return redirect(user_cart)
 
@@ -86,6 +98,12 @@ def remove_from_cart(request):
     return redirect(user_cart)
 
 def update_cart_item(request):
+    ciid = request.POST.get('ciid')
+    cart_item = Cart.objects.get(id = ciid)
+    cart_item.size = request.POST.get('size')
+    cart_item.quantity = request.POST.get('qty')
+    cart_item.price = int(cart_item.quantity) * int(cart_item.product.price)
+    cart_item.save()
     return redirect(user_cart)
 
 def place_order(request):
@@ -95,10 +113,13 @@ def place_order(request):
     total = 0 
     for item in items:
         total = total + item.price
-        item.ordered = True
-    order = Order(user = user, products = items, total_amount = total)
+    order = Order(user = user, total_amount = total, address = request.POST.get('address'), address2 = request.POST.get('address2'), country = request.POST.get('country'), state = request.POST.get('state'), pincode = request.POST.get('pincode'))
     order.save()
-    return redirect(user_cart)
+    for item in items:
+        order.products.add(item)
+        item.ordered = True
+    order.save()
+    return redirect(profile_page)
 
 def checkout(request):
     user = request.user
@@ -108,7 +129,17 @@ def checkout(request):
     for item in items:
         if(item.ordered == False):
             total = total + item.price
-    return render(request, "checkout-page.html", {'items': items, 'length': length, 'total': total})
+    context = {
+        'user': user,
+        'items': items, 
+        'length': length, 
+        'total': total,
+        'men': men,
+        'women': women,
+        'girls': girls,
+        'boys': boys,
+    }
+    return render(request, "checkout-page.html", context)
 
 def user_wishlist(request):
     user = request.user
@@ -129,14 +160,10 @@ def remove_from_wishlist(request):
     wishlist_item.delete()
     return redirect(user_wishlist)
 
-
-
 def profile_page(request):
-    men = Category.objects.filter(category_for="M")
-    women = Category.objects.filter(category_for="W")
-    girls = Category.objects.filter(category_for="G")
-    boys = Category.objects.filter(category_for="B")
+    orders = Order.objects.filter(user = request.user)
     context = {
+        'orders': orders,
         'men': men,
         'women': women,
         'girls': girls,

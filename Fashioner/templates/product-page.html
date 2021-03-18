@@ -173,7 +173,7 @@
         }
         
         .container {
-            margin: 0;
+            margin-top: 10px;
         }
         
         .dropdown:hover .dropdown-menu {
@@ -275,13 +275,15 @@
 </head>
 
 <body>
+
     {% include "navbar.html" %}
-    <div class="pl-4" style="padding-top: 70px; padding-bottom: 0px;">
-        <h5>Product Detail</h5>
+    <div style="padding-left: 35px; padding-top:75px;">
+        <h2>Product Details</h2>
     </div>
-    <div class="container-fluid pt-0 m-0">
-        <div class="row pt-0 mt-lg-0">
-            <div class="col-8 img-zoom-container pb-0 m-0" style="display: flex; justify-content: flex-start;">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 img-zoom-container" style="display: flex;align-items: center;">
                 <img id="myimage" src="{{product.image1}}" width="500" height="600">
                 <div id="myresult" class="img-zoom-result"></div>
             </div>
@@ -294,23 +296,23 @@
                     <form action="addtocart" method="POST" class="boxed">
                         {% csrf_token %}
                         <!-- size radio -->
-                        <input type="radio" id="S" name="size" value="S">
+                        <input type="radio" id="S" name="size" value="S" required>
                         <label for="S">S</label>
-                        <input type="radio" id="M" name="size" value="M">
+                        <input type="radio" id="M" name="size" value="M" required>
                         <label for="M">M</label>
-                        <input type="radio" id="L" name="size" value="L">
+                        <input type="radio" id="L" name="size" value="L" required>
                         <label for="L">L</label>
-                        <input type="radio" id="XL" name="size" value="XL">
+                        <input type="radio" id="XL" name="size" value="XL" required>
                         <label for="XL">XL</label>
-                        <input type="radio" id="XXL" name="size" value="XXL">
+                        <input type="radio" id="XXL" name="size" value="XXL" required>
                         <label for="XXL">XXL</label><br>
                         <!--  Quantity -->
                         <div class="former">
                             <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                            <input type="number" name="number" id="number" value="0" />
+                            <input type="number" name="qty" id="number" value="1" />
                             <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
                         </div>
-
+                        <!-- Product -->
                         <input type="hidden" name="pid" value="{{product.id}}">
                         <!-- <input type="hidden" value="sz" value="30">
                         <input type="hidden" value="qty" value=2> -->

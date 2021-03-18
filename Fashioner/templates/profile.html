@@ -90,7 +90,12 @@
                     <td>Email</td>
                     <td>{{user.email}}</td>
                 </tr>
-
+                {% for order in orders %}
+                    <tr>
+                        <td>Order</td>
+                        <td>{{order.id}}</td>
+                    </tr>
+                {% endfor %}
 
             </table>
         </div>
