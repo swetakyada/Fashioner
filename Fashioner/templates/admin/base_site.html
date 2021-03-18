@@ -1,9 +1,18 @@
 {% extends "admin/base.html" %} {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %} {% block extrastyle %}
 <style>
-    #header {
-        background-color: black;
-        padding-bottom: 15px;
-        padding-top: 15px;
+    body.login {
+        background-image: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
+    }
+    
+    body.login #header {
+        height: auto;
+        padding: 15px 16px;
+        justify-content: center;
+        background: #024444;
+    }
+    
+    body.login #content {
+        padding: 30px 25px 0;
     }
     
     body {
@@ -93,6 +102,61 @@
         background: #000000;
         color: #666;
     }
+    
+    #footer {
+        clear: both;
+        padding: 10px;
+    }
+    
+    #header {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        background: #0b0d0e;
+        color: #ffc;
+        overflow: hidden;
+    }
+    
+    body.login input,
+    a.button {
+        background: #1f2e35;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .sticky {
+        padding: 0px;
+    }
+    
+    #changelist div.actions {
+        padding: 10px 0px 10px 0px;
+        margin: 0;
+        background: #000;
+        border-top: none;
+        border-bottom: none;
+        line-height: 24px;
+        color: #fff;
+        width: 100%;
+    }
+    
+    #changelist div.actions select {
+        vertical-align: top;
+        height: 24px;
+        color: rgb(241, 76, 76);
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        padding: 0 0 0 4px;
+        margin: 0;
+        margin-left: 10px;
+    }
+    /* login ui */
 </style>
 
 
