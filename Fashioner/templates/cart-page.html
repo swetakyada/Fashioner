@@ -23,6 +23,11 @@
     <!-- Your custom styles (optional) -->
 
     <style type="text/css">
+
+        input::-webkit-inner-spin-button{
+            opacity: 100;
+        }
+
         /* Chart.js */
         
         @-webkit-keyframes chartjs-render-animation {
@@ -140,7 +145,6 @@
 
     <!--Main Navigation-->
     <header>
-
         <div class="jumbotron color-grey-light mt-70">
             <div class="d-flex align-items-center h-100">
                 <div class="container text-center py-5">
@@ -148,7 +152,6 @@
                 </div>
             </div>
         </div>
-
     </header>
     <!--Main Navigation-->
 
@@ -171,185 +174,175 @@
 
                                 <h5 class="mb-4">Cart (<span>{{ length }}</span> items)</h5>
                                 {% for item in items %}
-                                <div class="row mb-4">
-                                    <div class="col-md-5 col-lg-3 col-xl-3">
-                                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                                            <img class="img-fluid w-100" src="{{ item.product.image1 }}" alt="Sample">
-                                            <div class="mask waves-effect waves-light">
-                                                <img class="img-fluid w-100" src="{{ item.product.image2 }}">
-                                                <div class="mask rgba-black-slight waves-effect waves-light"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-9 col-xl-9">
-                                        <div>
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h5>{{ item.product.product_name }}</h5>
-                                                    <br>
-                                                    <p class="mb-3 text-muted text small">{{item.product.tagline}}</p>
-                                                    <p class="mb-3 text-muted text-uppercase small">SIZE : {{item.size}}</p>
-                                                    <p class="mb-3 text-muted text-uppercase small">Quantity : {{item.quantity}}</p>
+                                    <div class="row mb-4">
+                                        <div class="col-md-5 col-lg-3 col-xl-3">
+                                            <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                                <img class="img-fluid w-100" src="{{ item.product.image1 }}" alt="Sample">
+                                                <div class="mask waves-effect waves-light">
+                                                    <img class="img-fluid w-100" src="{{ item.product.image2 }}">
+                                                    <div class="mask rgba-black-slight waves-effect waves-light"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center">
+                                        <div class="col-md-7 col-lg-9 col-xl-9">
                                             <div>
-                                                <form action="removefromcart" name="{{ item.id }}" method="POST">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="cid" value="{{ item.id }}">
-                                                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-trash-alt mr-1"></i> Remove item </button>
-                                                </form>
-                                            </div>
-                                            <div>
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Update item</button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                                            </div>
-                                                            <form action="updatecartitem" name="update{{ item.id }}" method="POST" class="boxed">
-                                                                <div class="modal-body">
-                                                                    {% csrf_token %}
-                                                                    <!-- size radio -->
-                                                                    <input type="radio" id="S" name="size" value="S" required>
-                                                                    <label for="S">S</label>
-                                                                    <input type="radio" id="M" name="size" value="M" required>
-                                                                    <label for="M">M</label>
-                                                                    <input type="radio" id="L" name="size" value="L" required>
-                                                                    <label for="L">L</label>
-                                                                    <input type="radio" id="XL" name="size" value="XL" required>
-                                                                    <label for="XL">XL</label>
-                                                                    <input type="radio" id="XXL" name="size" value="XXL" required>
-                                                                    <label for="XXL">XXL</label><br>
-                                                                    <!--  Quantity -->
-                                                                    <div class="former">
-                                                                        <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                                                        <input type="number" name="qty" id="number" value="{{ item.quantity }}" />
-                                                                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                                                                    </div>
-                                                                    <!-- Product -->
-                                                                    <input type="hidden" name="ciid" value="{{ item.id }}"> {% comment %} <button type="submit" class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Update item </button>                                                                    {% endcomment %}
-                                                                </div>
-                                                                <div class="modal-footer" onclick="document.forms['update{{ item.id }}'].submit();">
-                                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <h5>{{ item.product.product_name }}</h5>
+                                                        <br>
+                                                        <p class="mb-3 text-muted text small">{{item.product.tagline}}</p>
+                                                        <p class="mb-3 text-muted text-uppercase small">SIZE : {{item.size}}</p>
+                                                        <p class="mb-3 text-muted text-uppercase small">Quantity : {{item.quantity}}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p class="mb-0"><span><strong>${{ item.price }}</strong></span></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <form action="removefromcart" name="remove{{ item.id }}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="cid" value="{{ item.id }}">
+                                                        <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt mr-1"></i> Remove item </button>
+                                                    </form>
+                                                </div>
+                                                <div>
+                                                    <form action="updatecartitem" name="update{{ item.id }}" method="POST" class="boxed">
+                                                        {% csrf_token %}
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id_{{ item.id }}">Update item</button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="id_{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLongTitle">{{ item.product.product_name }}</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <!-- size radio -->
+                                                                        <input type="radio" id="S_{{ item.id }}" name="size" value="S" required>
+                                                                        <label for="S_{{ item.id }}">S</label>
+                                                                        <input type="radio" id="M_{{ item.id }}" name="size" value="M" required>
+                                                                        <label for="M_{{ item.id }}">M</label>
+                                                                        <input type="radio" id="L_{{ item.id }}" name="size" value="L" required>
+                                                                        <label for="L_{{ item.id }}">L</label>
+                                                                        <input type="radio" id="XL_{{ item.id }}" name="size" value="XL" required>
+                                                                        <label for="XL_{{ item.id }}">XL</label>
+                                                                        <input type="radio" id="XXL_{{ item.id }}" name="size" value="XXL" required>
+                                                                        <label for="XXL_{{ item.id }}">XXL</label><br>
+                                                                        <!--  Quantity -->
+                                                                        <div class="former">
+                                                                            {% comment %} <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div> {% endcomment %}
+                                                                            <input type="number" name="qty_{{ item.id }}" id="number_{{ item.id }}" value="{{ item.quantity }}" step="1" />
+                                                                            {% comment %} <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div> {% endcomment %}
+                                                                        </div>
+                                                                        <!-- Product -->
+                                                                        <input type="hidden" name="ciid" value="{{ item.id }}"> 
+                                                                    </div>    
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0"><span><strong>${{ item.price }}</strong></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="mb-4"> 
+                                {% endfor %}
+
+                                <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding items to your cart does not mean booking them.</p>
+
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <h5 class="mb-4">Expected shipping delivery</h5>
+
+                                <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4">
+
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <h5 class="mb-3">The total amount of</h5>
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                        Temporary amount
+                                        <span>${{ total }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                        Shipping
+                                        <span>$00</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                        <div>
+                                            <strong>The total amount of</strong>
+                                            <strong>
+                            <p class="mb-0">(including VAT)</p>
+                        </strong>
+                                        </div>
+                                        <span><strong>${{ total }}</strong></span>
+                                    </li>
+                                </ul>
+
+                                <a href="checkout">
+                                    <button type="button" class="btn btn-primary btn-block waves-effect waves-light">go to checkout</button>
+                                </a>
+
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="https://mdbootstrap.com/previews/ecommerce-demo/examples/pages/basic/cart.html#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Add a discount code (optional)
+                                <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                </a>
+
+                                <div class="collapse" id="collapseExample">
+                                    <div class="mt-3">
+                                        <div class="md-form md-outline mb-0">
+                                            <input type="text" id="discount-code" class="form-control font-weight-light" placeholder="Enter discount code">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <hr class="mb-4"> {% endfor %}
-
-                            <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding items to your cart does not mean booking them.</p>
-
-                        </div>
-                    </div>
-                    <!-- Card -->
-
-                    <!-- Card -->
-                    <div class="card mb-4">
-                        <div class="card-body">
-
-                            <h5 class="mb-4">Expected shipping delivery</h5>
-
-                            <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
-                        </div>
-                    </div>
-                    <!-- Card -->
-
-                    <!-- Card -->
-                    <div class="card mb-4">
-                        <div class="card-body">
-
-                            <h5 class="mb-4">We accept</h5>
-
-                            <img class="mr-2" width="45px" src="{% static 'cart_files/visa.svg' %}" alt="Visa">
-                            <img class="mr-2" width="45px" src="{% static 'cart_files/amex.svg' %}" alt="American Express">
-                            <img class="mr-2" width="45px" src="{% static 'cart_files/mastercard.svg' %}" alt="Mastercard">
-                            <img class="mr-2" width="45px" src="{% static 'cart_files/paypal.png' %}" alt="PayPal acceptance mark">
-                        </div>
-                    </div>
-                    <!-- Card -->
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4">
-
-                    <!-- Card -->
-                    <div class="card mb-4">
-                        <div class="card-body">
-
-                            <h5 class="mb-3">The total amount of</h5>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                    Temporary amount
-                                    <span>${{ total }}</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    Shipping
-                                    <span>$00</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                    <div>
-                                        <strong>The total amount of</strong>
-                                        <strong>
-                        <p class="mb-0">(including VAT)</p>
-                      </strong>
-                                    </div>
-                                    <span><strong>${{ total }}</strong></span>
-                                </li>
-                            </ul>
-
-                            <a href="checkout">
-                                <button type="button" class="btn btn-primary btn-block waves-effect waves-light">go to checkout</button>
-                            </a>
-
-                        </div>
-                    </div>
-                    <!-- Card -->
-
-                    <!-- Card -->
-                    <div class="card mb-4">
-                        <div class="card-body">
-
-                            <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="https://mdbootstrap.com/previews/ecommerce-demo/examples/pages/basic/cart.html#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Add a discount code (optional)
-                  <span><i class="fas fa-chevron-down pt-1"></i></span>
-                </a>
-
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <div class="md-form md-outline mb-0">
-                                        <input type="text" id="discount-code" class="form-control font-weight-light" placeholder="Enter discount code">
-                                    </div>
                                 </div>
                             </div>
+                            <!-- Card -->
+
                         </div>
-                    </div>
-                    <!-- Card -->
+                        <!--Grid column-->
 
                 </div>
-                <!--Grid column-->
+                <!--Grid row-->
 
-        </div>
-        <!--Grid row-->
-
-        </section>
-        <!--Section: Block Content-->
+            </section>
+            <!--Section: Block Content-->
 
         </div>
     </main>
@@ -369,22 +362,22 @@
     <script type="text/javascript" src="{% static 'cart_files/mdb.min.js.download' %}"></script>
     <!-- MDB Ecommerce JavaScript -->
     <script type="text/javascript" src="{% static '/cart_files/mdb.ecommerce.min.js.download' %}"></script>
-    <script>
+    {% comment %} <script>
         function increaseValue() {
-            var value = parseInt(document.getElementById('number').value, 10);
+            var value = parseInt(document.getElementByName('qty').value, 10);
             value = isNaN(value) ? 0 : value;
             value++;
-            document.getElementById('number').value = value;
+            document.getElementByName('qty').value = value;
         }
 
         function decreaseValue() {
-            var value = parseInt(document.getElementById('number').value, 10);
+            var value = parseInt(document.getElementByName('qty').value, 10);
             value = isNaN(value) ? 0 : value;
             value < 1 ? value = 1 : '';
             value--;
-            document.getElementById('number').value = value;
+            document.getElementByName('qty').value = value;
         }
-    </script>
+    </script> {% endcomment %}
 
     <div class="hiddendiv common"></div>
 </body>

@@ -277,19 +277,23 @@
 <body>
 
     {% include "navbar.html" %}
+    <br>
     <div style="padding-left: 35px; padding-top:75px;">
         <h2>Product Details</h2>
     </div>
-
+    <br>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8 img-zoom-container" style="display: flex;align-items: center;">
+            <div class="col-8 img-zoom-container" style="display: flex; justify-content: flex-start;">
                 <img id="myimage" src="{{product.image1}}" width="500" height="600">
-                <div id="myresult" class="img-zoom-result"></div>
+                <div width="10"></div>
+                <div id="myresult" class="img-zoom-result" width="500" height="600"></div>
             </div>
             <div class="col-3">
-                <div>{{product.product_name}}</div>
-                <hr><br/>
+                <div><h3>{{product.product_name}}</h3></div>
+                <hr>
+                <div><h5>{{ product.tagline }}</h5></div>
+                <br/>
                 <center>
                     <h2>{{product.price}}</h2>
                     <h5>inclusive all taxes</h5><br/>
@@ -323,25 +327,23 @@
                         <input type="hidden" name="pid" value="{{product.id}}">
                         <button type="submit" class="btn btn-light">Wishlist</button>
                     </form>
+                    <div>
+                        <br>
+                        <h2>Product Details</h2>
+                        <p>{{product.description}}</p>
+                        <p>
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit iure atque, non deleniti quod nam, modi optio odit voluptas quaerat praesentium error totam accusamus ab rem, distinctio facere aperiam nostrum.
+                        </p>
+                    </div>
                 </center>
-                <div>
-                    <br>
-                    <h2>Product Details</h2>
-                    <p>{{product.description}}</p>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit iure atque, non deleniti quod nam, modi optio odit voluptas quaerat praesentium error totam accusamus ab rem, distinctio facere aperiam nostrum.
-                    </p>
-                </div>
+            </div>
+            <div class=" col">
+                <img id="myimage" src="{{product.image2}}" width="500" height="600">
+                <img id="myimage" src="{{product.image3}}" width="500" height="600">
             </div>
         </div>
-
-        <div class=" col">
-            <br/>
-            <img id="myimage" src="{{product.image2}}" width="500" height="600">
-            <img id="myimage" src="{{product.image3}}" width="500" height="600">
-        </div>
     </div>
-
+    <br>
     <script>
         function increaseValue() {
             var value = parseInt(document.getElementById('number').value, 10);

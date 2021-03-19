@@ -4,7 +4,7 @@ from .models import Product,Cart,Category,Order,WishList
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
-
+import requests
 
 # Create your views here.
 
@@ -35,10 +35,6 @@ def products(request):
 def product_page(request):
     id = int(request.POST['pid'])-1
     product = Product.objects.get(id = str(id))
-    men = Category.objects.filter(category_for="M")
-    women = Category.objects.filter(category_for="W")
-    girls = Category.objects.filter(category_for="G")
-    boys = Category.objects.filter(category_for="B")
     context = {
         'product': product,
         'men': men,
@@ -51,10 +47,6 @@ def product_page(request):
 @login_required(login_url='/accounts/')
 def category_page(request, cid):
     products = Product.objects.filter(category_id = cid)
-    men = Category.objects.filter(category_for="M")
-    women = Category.objects.filter(category_for="W")
-    girls = Category.objects.filter(category_for="G")
-    boys = Category.objects.filter(category_for="B")
     context = {
         'products': products,
         'men': men,
@@ -178,3 +170,9 @@ def profile_page(request):
         'boys': boys,
     }
     return render(request, "profile.html", context)
+
+def product_redirect(request):
+    post_data = {'pid': request.POST.get('pid')}
+    r = requests.post(request.build_absolute_uri(reverse('product_page')), data = post_data)
+    print(r.url)
+    return redirect(r)
