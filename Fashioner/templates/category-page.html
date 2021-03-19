@@ -81,9 +81,7 @@
 
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4">
-
-                        <!--Card-->
-                        <form action="product/" name="{{ item.id }}" method="POST">
+                        <form action="productredirect" name="{{ item.id }}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="pid" value="{{ item.id }}">
                             <!--Card-->
@@ -113,9 +111,6 @@
                                     <h4 class="font-weight-bold blue-text">
                                         <strong>{{ item.price }}</strong>
                                     </h4>
-                                    <h3>
-                                        <button type="button" class="btn btn-cyan">Add to Cart</button>
-                                    </h3>
 
                                 </div>
                                 <!--Card content-->
@@ -123,7 +118,6 @@
                             </div>
                             <!--Card-->
                         </form>
-                        <!--Card-->
 
                     </div>
                     <!--Grid column-->
