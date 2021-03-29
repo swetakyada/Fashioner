@@ -81,12 +81,14 @@ def category_page(request, cid):
 
 def user_cart(request):
     user = request.user
-    items = Cart.objects.filter(user = user)
-    length = len(items)
+    itms = Cart.objects.filter(user = user)
+    length = len(itms)
     total = 0 
-    for item in items:
+    items = []
+    for item in itms:
         if(item.ordered == False):
             total = total + item.price
+            items.append(item)
     context = {
         'items': items, 
         'length': length, 
@@ -132,8 +134,9 @@ def place_order(request):
     order.save()
     for item in items:
         order.products.add(item)
-        item.ordered = True
-    order.save()
+        itm = Cart.objects.get(id = item.id)
+        itm.ordered = True
+        itm.save()
     return redirect(profile_page)
 
 def checkout(request):

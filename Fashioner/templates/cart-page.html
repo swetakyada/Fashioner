@@ -232,15 +232,15 @@
                                                                         <label for="XXL_{{ item.id }}">XXL</label><br>
                                                                         <!--  Quantity -->
                                                                         <div class="former">
-                                                                            {% comment %} <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div> {% endcomment %}
-                                                                            <input type="number" name="qty_{{ item.id }}" id="number_{{ item.id }}" value="{{ item.quantity }}" step="1" />
-                                                                            {% comment %} <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div> {% endcomment %}
+                                                                            {% comment %} <div class="value-button" id="decrease_{{ item.id }}" onclick="decreaseValue()" value="Decrease Value">-</div> {% endcomment %}
+                                                                            <input type="number" name="qty" id="number_{{ item.id }}" value="{{ item.quantity }}" step="1" />
+                                                                            {% comment %} <div class="value-button" id="increase_{{ item.id }}" onclick="increaseValue()" value="Increase Value">+</div> {% endcomment %}
                                                                         </div>
                                                                         <!-- Product -->
                                                                         <input type="hidden" name="ciid" value="{{ item.id }}"> 
                                                                     </div>    
                                                                     <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                        <button type="submit" name="submit_{{ item.id }}" class="btn btn-primary">Save changes</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
