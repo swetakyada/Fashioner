@@ -1,10 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,reverse
 from django.views.generic import ListView
 from .models import Product,Cart,Category,Order,WishList
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
-import requests
+from django.http import request,response
+# import requests
 
 # Create your views here.
 
@@ -13,6 +14,7 @@ men = Category.objects.filter(category_for="M")
 women = Category.objects.filter(category_for="W")
 girls = Category.objects.filter(category_for="G")
 boys = Category.objects.filter(category_for="B")
+
 
 
 @login_required(login_url='/accounts/')
@@ -33,8 +35,29 @@ def products(request):
 
 @login_required(login_url='/accounts/')
 def product_page(request):
+   
     id = int(request.POST['pid'])-1
-    product = Product.objects.get(id = str(id))
+    
+    try:
+        product = Product.objects.get(id = str(id))
+    except:
+        product = None
+    context = {
+        'product': product,
+        'men': men,
+        'women': women,
+        'girls': girls,
+        'boys': boys,
+    }
+    return render(request, "product-page.html", context)
+
+def cproduct(request):
+    y = ''.join(request.POST.get('pid'))
+    id=int(y)
+    try:
+        product = Product.objects.get(id = id)
+    except:
+        product = None
     context = {
         'product': product,
         'men': men,
@@ -173,6 +196,21 @@ def profile_page(request):
 
 def product_redirect(request):
     post_data = {'pid': request.POST.get('pid')}
-    r = requests.post(request.build_absolute_uri(reverse('product_page')), data = post_data)
+    r = request.post(request.build_absolute_uri(reverse('product_page')), data = post_data)
     print(r.url)
     return redirect(r)
+
+# def product_redirect(request):
+#     post_data = {'pid': request.POST.get('pid')}
+#     return render(request,"product-page.html",post_data)
+def category_product_page(request):
+    id = int(request.POST['pid'])-1
+    product = Product.objects.get(id = str(id))
+    context = {
+        'product': product,
+        'men': men,
+        'women': women,
+        'girls': girls,
+        'boys': boys,
+    }
+    return render(request, "product-page.html", context)

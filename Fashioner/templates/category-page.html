@@ -81,7 +81,7 @@
 
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4">
-                        <form action="productredirect" name="{{ item.id }}" method="POST">
+                        <form action="{% url 'cproduct' %}" name="{{ item.id }}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="pid" value="{{ item.id }}">
                             <!--Card-->
@@ -104,14 +104,14 @@
                                     </a>
                                     <h5>
                                         <strong>
-                                        <a href="" class="dark-grey-text">{{ item.product_name }}</a>
+                                        <a  class="dark-grey-text">{{ item.product_name }}</a>
                                     </strong>
                                     </h5>
 
                                     <h4 class="font-weight-bold blue-text">
                                         <strong>{{ item.price }}</strong>
                                     </h4>
-
+                                    <input type="submit" style="background-color: rgb(214, 240, 240);border: none;height: 50px;width: 100px;" value="show details" />
                                 </div>
                                 <!--Card content-->
 
